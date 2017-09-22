@@ -1,0 +1,387 @@
+1.&lt; '<'  &gt; '>'  &nbsp;
+
+
+1.关于锚点 如何滑动的方式滑动到锚点的地方
+ $('#a1').click(function(){
+            $('html, body').animate({
+              scrollTop: $($.attr(this, 'href')).offset().top
+            }, 500);
+            return false;
+            
+  })
+2.关于href  src 的区别 
+(1) src用于替换当前元素；href用于在当前文档和引用资源之间建立联系。
+(2) src 当浏览器解析到该元素时，会暂停浏览器的渲染，直到该资源加载完毕。这也是将js脚本放在底部而不是头部得原因。
+
+3.DOCTYPE 作用  
+声明位于文档中最前面 ,告知浏览器的解析器,用什么文档类型规范解析这个文档
+该标签可声明三种 DTD 类型，分别表示严格版本、过渡版本以及基于框架的HTML 文档。
+标准模式:浏览器按w3c标准解析执行代码  ; 
+怪异模式: 浏览器以自己的方式解析执行代码 ,因为不同浏览器解析执行的方式不一样,所以叫怪异模式;
+严格模式:浏览器根据web标准去解析页面,是一种要求严格DTD,不允许使用任何表现层的语法.
+DTD声明定义了标准文档的类型文档类型,会使浏览器使用相应的方式加载网页并显示忽略DTD声明  将使网页进入怪异模式
+
+
+4.HTML5新特性
+
+Html5新增了 27 个元素，废弃了 16 个元素，根据现有的标准规范，把 HTML5 的元素按优先级定义为结构性属性、级块性元素、行内语义性元素和交互性元素 4 大类。
+结构性元素主要负责web上下文结构的定义
+section：在 web 页面应用中，该元素也可以用于区域的章节描述。
+header：页面主体上的头部， header 元素往往在一对 body 元素中。
+footer：页面的底部（页脚），通常会标出网站的相关信息。
+nav：专门用于菜单导航、链接导航的元素，是 navigator 的缩写。
+article：用于表现一篇文章的主体内容，一般为文字集中显示的区域。
+级块性元素主要完成web页面区域的划分，确保内容的有效分割。
+aside：用于表达注记、贴士、侧栏、摘要、插入的引用等作为补充主体的内容。
+figure：是对多个元素进行组合并展示的元素，通常与 ficaption 联合使用。
+code：表示一段代码块。
+dialog：用于表达人与人之间的对话，该元素包含 dt 和 dd 这两个组合元素， dt 用于表示说话者，而 dd 用来表示说话内容。
+行内语义性元素主要完成web页面具体内容的引用和描述，是丰富内容展示的基础。
+meter：表示特定范围内的数值，可用于工资、数量、百分比等。
+time：表示时间值。
+progress：用来表示进度条，可通过对其 max 、 min 、 step 等属性进行控制，完成对进度的表示和监事。
+video：视频元素，用于支持和实现视频文件的直接播放，支持缓冲预载和多种视频媒体格式。
+audio：音频元素，用于支持和实现音频文件的直接播放，支持缓冲预载和多种音频媒体格式。
+交互性元素主要用于功能性的内容表达，会有一定的内容和数据的关联，是各种事件的基础。
+details：用来表示一段具体的内容，但是内容默认可能不显示，通过某种手段（如单击）与 legend 交互才会显示出来。
+datagrid：用来控制客户端数据与显示，可以由动态脚本及时更新。
+menu：主要用于交互菜单（曾被废弃又被重新启用的元素）。
+command：用来处理命令按钮。
+
+5.浏览器内核
+ie:trident内核
+firefox: gecko内核
+Safari:webkit
+Opera:Blink内核
+Chrome:Blink (基于webkit) ,goole 与Opera共同开发
+
+6.WEB标准  W3C 的理解与认识
+闭合标签  标签小写  不乱嵌套方便爬虫  使用外链css 和js脚本 结构行为表现的分离 文件下载与页面速度更快 内容能被更多的用户所访问  内容能被更广泛的设备所访问 更少的代码和组件
+容易维护 改版方便 不需要变动页面内容  提供打印版本而不需要复制内容 提高网站易用性
+
+WEB标准 不是某一个标准，而是一系列标准的集合。网页主要由三部分组成：结构（Structure）、表现（Presentation）和行为（Behavior）。对应的标准也分三方面：结构化标准语言主要包括XHTML和XML，表现标准语言主要包括CSS，行为标准主要包括对象模型（如W3C DOM）、ECMAScript等。这些标准大部分由 万维网联盟 （外语缩写： W3C ）起草和发布，也有一些是其他标准组织制订的标准，比如ECMA（European Computer Manufacturers Association）的ECMAScript标准。
+
+
+7.HTML语义化的理解
+strong em ins del
+hander footer nav section 
+article :用来在页面中表示一套结构完整且独立的内容部分  
+aslde:主题的附属信息 ( 用途很广，主要就是一个附属内容 ) ，如果 article 里面为一篇文章的话，那么文章的作者以及信息内容就是这篇文章的附属内容了
+根据内容的结构化（内容语义化），选择合适的标签（代码语义化）便于开发者阅读和写出更优雅的代码的同时让浏览器的爬虫和机器很好地解析。
+在没有CSS的情况下，页面也能呈现出很好地内容结构、代码结构 : 为了裸奔时好看；
+用户体验：例如title、 alt 用于解释名词或解释图片信息、 label 标签的活用；
+有利于SEO：和搜索引擎建立良好沟通，有助于爬虫抓取更多的有效信息：爬虫依赖于标签来确定上下文和各个关键字的权重；
+方便其他设备解析（如屏幕阅读器、盲人阅读器、移动设备）以意义的方式来渲染网页；
+便于团队开发和维护，语义化更具可读性，是下一步网页的重要动向，遵循W3C标准的团队都遵循这个标准，可以减少差异化。
+<header></header>
+<footer></footer>
+<nav></nav>
+<section></section>
+<article></article> SM:用来在页面中表示一套结构完整且独立的内容部分
+<aslde></aside> SM:主题的附属信息 ( 用途很广，主要就是一个附属内容 ) ，如果 article 里面为一篇文章的话，那么文章的作者以及信息内容就是这篇文章的附属内容了
+<figure></figure>SM:媒体元素，比如一些视频，图片啊等等
+<datalist></datalist>
+SM:选项列表，与 input 元素配合使用，来定义 input 可能的值
+<details></details>
+SM:用于描述文档或者文档某个部分的细节 ~ 默认属性为 open~
+ps:配合 summary 一起使用
+
+8.link和@import的区别
+XML/HTML代码
+<link rel='stylesheet' rev='stylesheet' href='CSS文件 ' type='text/css' media='all' />
+XML/HTML代码
+<style type='text/css' media='screen'>
+@import url('CSS文件 ');
+</style>
+两者都是外部引用CSS的方式，但是存在一定的区别：
+区别1： link 是 XHTML 标签，除了加载 CSS 外，还可以定义 RSS 等其他事务； @import 属于 CSS 范畴，只能加载 CSS 。
+区别2： link 引用 CSS 时，在页面载入时同时加载； @import 需要页面网页完全载入以后加载。
+区别3： link 是 XHTML 标签，无兼容问题； @import 是在 CSS2.1 提出的，低版本的浏览器不支持。
+区别4： link 支持使用 Javascript 控制 DOM 去改变样式；而 @import 不支持。
+
+
+9.关于高内聚低耦合    
+  起因：模块独立性指每个模块只完成系统要求的独立子功能，并且与其他模块的联系最少且接口简单，两个定性的度量标准――耦合性和内聚性。
+
+      耦合性也称块间联系。指软件系统结构中各模块间相互联系紧密程度的一种度量。模块之间联系越紧密，其耦合性就越强，模块的独立性则越差。模块间耦合高低取决于模块间接口的复杂性、调用的方式及传递的信息。
+      耦合性分类(低――高): 无直接耦合;数据耦合;标记耦合;控制耦合;公共耦合;内容耦合;
+  1 无直接耦合:
+  2 数据耦合: 指两个模块之间有调用关系，传递的是简单的数据值，相当于高级语言的值传递;
+  3 标记耦合: 指两个模块之间传递的是数据结构，如高级语言中的数组名、记录名、文件名等这些名字即标记，其实传递的是这个数据结构的地址;
+  4 控制耦合: 指一个模块调用另一个模块时，传递的是控制变量（如开关、标志等），被调模块通过该控制变量的值有选择地执行块内某一功能;
+  5 公共耦合: 指通过一个公共数据环境相互作用的那些模块间的耦合。公共耦合的复杂程序随耦合模块的个数增加而增加。
+  6 内容耦合: 这是最高程度的耦合，也是最差的耦合。当一个模块直接使用另一个模块的内部数据，或通过非正常入口而转入另一个模块内部。
+   
+      内聚性又称块内联系。指模块的功能强度的度量，即一个模块内部各个元素彼此结合的紧密程度的度量。若一个模块内各元素（语名之间、程序段之间）联系的越紧密，则它的内聚性就越高。
+      内聚性匪类(低――高): 偶然内聚;逻辑内聚;时间内聚;通信内聚;顺序内聚;功能内聚;
+  1 偶然内聚: 指一个模块内的各处理元素之间没有任何联系。
+  2 逻辑内聚: 指模块内执行几个逻辑上相似的功能，通过参数确定该模块完成哪一个功能。
+  3 时间内聚: 把需要同时执行的动作组合在一起形成的模块为时间内聚模块。
+  4 通信内聚: 指模块内所有处理元素都在同一个数据结构上操作（有时称之为信息内聚），或者指各处理使用相同的输入数据或者产生相同的输出数据。
+  5 顺序内聚: 指一个模块中各个处理元素都密切相关于同一功能且必须顺序执行，前一功能元素输出就是下一功能元素的输入。
+  6 功能内聚: 这是最强的内聚，指模块内所有元素共同完成一个功能，缺一不可。与其他模块的耦合是最弱的。
+   
+      耦合性与内聚性是模块独立性的两个定性标准，将软件系统划分模块时，尽量做到高内聚低耦合，提高模块的独立性，为设计高质量的软件结构奠定基础。
+   
+      有个例子很容易明白：一个程序有50个函数，这个程序执行得非常好；然而一旦你修改其中一个函数，其他49个函数都需要做修改，这就是高耦合的后果。
+  一旦你理解了它，你编写概要设计的时候设计类或者模块自然会考虑到“高内聚，低耦合”。
+
+10.浮动特点
+  1.浮动脱离标准流 不占位置  会影响标准流, 浮动只有左右浮动.
+  2.浮动的元素a排列位置跟上一个块元素有关,如果上一个元素浮动,则a元素顶部会和上一个元素的顶部对其,如果上一个元素时标准流,则a元素的顶部会和上一个元素的底部对其
+  3.一个父盒子里面的自盒子,如果其中一个子元素有浮动则其他子元素需要浮动这样才能一行对其
+  4.浮动根据元素书写的位置来显示相应的浮动
+  5.元素添加浮动后,元素会有行内块元素的特性,元素的大小完全取决于定义的大小或默认的内容多少
+  6.如果div没有设置高 这个div中的所有与元素都浮动了  南无这个div的高0
+
+11.清除浮动
+  1.设置宽高
+  2.clear left清除左浮动,right清除有浮动,both清除所有浮动 (父盒子最后添加一个添加空元素 设置clear属性)
+  3.父盒子设置overflow hidden 超出部分隐藏, scroll超出部分滚动条,auto 超出部分显示滚动条,否则不显示
+  4.伪元素清除浮动 
+  .clearfix::after,.clearfix::before{
+    content:'';
+    height:0;
+    display:block;
+    visibility:hidden;
+    line-height:0;
+    clear:both
+  }
+  .clearfix{
+    zoom:1;//兼容ie
+  }
+
+
+
+2.http 协议 所有www文件都必须遵守的标准
+  http时一个客户端和服务器请求和应答的标准tcp  ,经历三次握手建立连接(域名解析 通过DNS服务器进行域名解析的到网站的ip地址 然后向这个ip地址发送一个建立连接的请求 如果吴福气接受到请求会返回一个确认  客户端的到确认 再次发送确认 链接成功)
+
+  创建连接后,服务器会根据url请求中的信息进行处理,做出响应,如返回html文件(建立好链接后,客户端就会发送一个http请求 请求信息包含一个头部和一个请求体,)
+  客户端浏览器得到html渲染,
+
+
+
+
+
+
+
+
+iScroll.js  水平竖直滚动  弹性滚动的类库
+mock.js 生成随机数据(json)，拦截 Ajax 请求
+Ant-design(阿里 基于react组件库)
+
+mvc html(M) css(V) js(C) 本质是实现模块化  
+mvvm框架  react系列(redux react-router react-dedux)
+
+
+ES6
+--------------------------------------------
+(箭头函数  class  import export )  var 定义的全局属性 window.也可以访问  let 只能用变量名访问  const 不可变
+变量的析构赋值  数组 对象   模板字符串``字符串换行不需要+ 变量引入${}
+箭头函数  函数体内的this对象,就定义时在的对象,而不是使用时所在的对象
+class   class 类名{
+          constructor(x,y){
+              this.x = x;
+              this,y = y;          
+          }    
+
+          tosting = () =>{
+
+          }
+        }
+        class 类 extends 类2{
+          constructor(x,y,z){
+            super(x,y)
+            this.z = z;
+          }
+
+          tosting= ()=>{
+            return this.z +'' +super.tostring();
+          }
+        }
+模块导入 import ,导出 export 
+  import {stat ,readFile} from 'fs';
+
+
+  var firstName = 'Michel';
+  var year = 1994;
+  lasName = 'name';
+  export{firstName,year,lastName} ==={firstName:firstName,year:year,lastName:lastName}
+  export default function(){..};  导出模块 默认的只有一个 导入的时候可以随意指定名字
+  
+
+  import Fun,{firstName ,firstName,year} from '文件路径/文件名'; 
+  
+...将其后的东西付给一个变量
+var [a,...b] = [1,2,3,4,5,6]
+console.log(b); //[2,3,4,5,6]
+
+函数 默认值 
+
+
+react 
+-----------------------------------------
+react.js小书  (需要搞定的:生命周期  props state区别  组件的封装  组件之间的通信 
+              状态管理redux  单页面路由react-router)
+生命周期:       Mounting:constructor() componentWillMount() render() componentDidMount()
+              Updating:  componentWillReaceiveProps() shouldComponentUpdate() ComponentWillUpdate() render()   componentDidUpdate()
+              Unmounting:   componentWillUnmount()
+state 自检自身对象 可变 props 组件之间传递的信息  不可变
+defaultProps  默认props  类名.defaultProps{ 参数名: 值}
+
+组件的封装  function(){} , class //常用 
+class Welcome extends React.component{
+  render(){
+    return <h1>hello</h1>
+  }
+}
+export defult Welcome
+
+
+
+
+===================================================================
+smart 组件 dumb 组件
+组件之间的通信 (父子组件 ,兄弟组件,祖先后代 Provider  [getChildContext]  祖先加这个属性 [this.context]后代可以调用)
+  
+  redux: createStore ,  combineREduers  (组合)   state action
+
+
+
+
+//首先定义了一个action类型，我们知道更新state的唯一方法就是dispatch一个action，这个action是用来初始化state的，后面会用到它
+connect() --->dispathch=={action:type} ---> reducers[ combineReduers(reducers打包)] ==={stu ,teacher}------>store
+
+//reducer为function。当dispatch一个action时，此函数接收action来更新state
+
+redux[ actions store reducers[combineReduers(reducers打包) createStore]
+
+
+redux[
+      creatStore --> Store    store.getstate(获取全局 一改全改 不能注入)   store.dipatch(在每个组件中调用 注入需要用的参数   需要用connect())   <------
+      combineReducers--->reducers            |
+    ]                                        |
+                                             | 
+react-redux--->[                             |
+        Provider  祖先后代组件                 |
+        connect()  高阶组件  获取  抽离         |
+    ]
+
+=======================================================
+
+
+react-router 
+
+
+
+window.onpopstate 回退事件
+需要 pushState添加历史记录  (ajax不能记录历史)_
+
+
+
+后端框架
+express :中间件  cookie session mongodb  redis
+
+
+自动化工具 gulp webpack
+gulp:流式操作  node.js 
+===========================
+webpack 
+ npm install webpack 
+加载器  loaders
+
+入口(Entry)app.js[.scss .json img..]  
+
+const PATHS ={
+  app: path.join()
+}
+
+module.exports = {
+  //开始
+  entry:{
+    app:PATHS.app
+  },
+  //放到那
+  output:{
+    path:PATHS.rootDir,
+    publicPath:'/',//影响的时打包时的路径
+    filename:'[name].js'
+  },
+  //插件
+  plugins:[
+    new HtmlWebpackPlugin({
+      inject:
+    })
+  ],
+
+  //加载器
+  module:{
+    //各种loader
+    rules:[]
+  }
+
+
+}
+
+移动web开发问题
+webpack  [name].[chunkhash:8].js 为了优化  不需要手动清除缓存 总是获取最新的
+
+
+
+<meta /> seo优化 http  移动 编码
+
+
+优化 缓存 定期更新 
+
+分页器 轮播图 导航栏等   JavaScript面向对象 的方式封装 
+
+函数节流
+
+跨域 jsonp  web请求
+
+
+h5 新增api  定位 选择  全屏 worker 画布 fullscrcen storage daraset classlist
+新增标签  
+
+创建一个 nav   document.createElement('nav')
+
+单例设计模式
+
+transfrom  translate
+
+
+sass 的自动编译 和 手动编译
+
+渐变  background-clip
+      -weibit-text-fiel-color
+
+事件委托    冒泡 event target   on
+
+zepto
+
+两个jQuery  $.noConfilct() 不写ture只放弃$ jquery能用 加true 放弃了$ 和jQuery ==== $$   立即函数
+
+箭头函数的this 是 在哪定义 他的this就是他的父级
+
+
+
+
+viewport
+visunl
+lagout
+visual = idea/scale instial-scale:0.5
+
+transiton问题  fixed失效  iscroll 
+
+rem 单位  移动端开发  px-torem
+
+fetch('url',{
+  method:'POST',
+  headers:{
+    'Content-Type','application/json'
+  },
+  body:内容
+}).  FormData()表单序列化的构造函数  whatwg-fetch  (同构 前后端模板相同)isomorphic-fetch
+
+
+websocket 

@@ -1,0 +1,161 @@
+var x = '54' + 0 //54
+var y = 54 +'' //'54'
+
+
+=== 会判断类型不会隐式转换
+== 可以隐式转换去比较 
+-------------------------------------------------------
+//消息对话框
+var con = confirm(str);
+if(con){
+	//直接向html输出流写内容
+	document.write('true')
+}else{
+	document.write('false')
+}
+消息对话框  str1 显示在消息对话框的文本 不可改   str2 文本框内容  可修改
+var pro = prompt(str1,str2)
+确定提交内容  取消返回null
+
+
+打开新窗口
+ window.open('http://www.imooc.com','_blank','width=300,height=200,menubar=no,toolbar=no, status=no,scrollbars=yes')
+
+ ---------------------------------------------------------
+ 时间
+var mydate = new Date()
+console.log(mydate)// 当前时间
+mydate.setTime( mydate.getTime() + 2 *60*60*1000)//时间推迟2小时
+console.log(mydate)
+
+字符串
+string.toLowerCase()//小写
+string.toUpperCase() //大写
+string.charAt(index)//获取字符串某个位置的值
+string.indexOf(strings,index) //字符串首次出现的位置 第二个参数检索是开始的位置
+string.split(spot,index)// 分割点  第几次分割返回
+string.split('')//字符串每个字符分割
+string.split('-')//按- 进行分割
+string.substring(begin,stop)//提取字符串的从某个位置到某个位置
+string.substr(begin,length) //提取字符串某个位置开始指定长度段
+
+Math
+Math.ceil(number) //向上取整  1.1 ==>2
+Math.floor(number) // 向下取整 1.9 ==>1
+Math.round(number) // 四舍五入
+Math.random() //0-1 随机数
+
+
+数组
+array.concat(array2) //数组拼接
+array.join('分隔符')//数组用分隔符连接 
+array.reverse()//颠倒顺序
+array.slice(start,end) // 从start下标开始到end结束 选定元素
+array.sort()//使数组按照一定的顺序排序
+function arr(a,b){
+	return  b - a //降序
+}
+array.sort(arr)
+array.sort() //打印数组
+
+var i = setTimeout('functionname',time)//计时器
+clearTimeout(i)//取消计时器
+window.history.// 记录浏览器经过的url页面 实现浏览器前进与后退相似导航功能
+
+
+
+
+javascript 数据类型
+undefined 未定义  ,boolean 布尔值  ,string 字符串  ,number 数值 ,object 对象或null ,function 函数,NaN 非数值类型
+
+字符串 var a =10 ;
+ a.toString(10);//'10'
+ a.toString(16);//'a'
+ a.toString(2);//'1010'
+ a.toString(8);//8
+
+分析时间复杂度及意义  少的内存多的性能
+
+
+DNS解析 域名 链接
+IO--- size 减少请求次数:css合并 字体图标 
+  --- 次数  缓存 请求并行  精灵图
+  --- 阻塞/延迟 cdn分发优化的 css放在前 js放在后
+  --- 带宽 cdn
+懒加载 css,js代码
+css加载不会阻塞DOM树的解析,js加载会阻塞DOM树的解析  css加载会阻塞DOM树的渲染  css加载不会阻塞后面js语句的执行
+
+
+
+
+ javascript模块化之CommonJS、AMD、CMD、UMD、ES6
+
+CommonJS:
+ CommonJS(是一个更偏向于服务器端的规范)NodeJS采用了这个规范 就近依赖  阻塞 同步加载模块 
+ 对于浏览器而言，它需要从服务器加载模块，涉及到网速，代理等原因，一旦等待时间过长，浏览器处于”假死”状态。
+ 所以在浏览器端，不适合于CommonJS规范。所以在浏览器端又出现了一个规范—-AMD
+//var math = require('math');
+//math.add(2, 3); // 5
+
+
+
+AMD(requireJS加载模块，采用的是AMD规范): 异步加载  全局依赖
+	采用require命令加载模块 采用异步方式加载模块  ,模块的加载不影响他后面语句的运行  [依赖前置]
+// require([module],callback);  第一个参数是数组  里面的成员时要加载的模块,callback时加载完后回调函数
+//require(['math'], function(math) {
+//  math.add(2, 3);
+//})
+
+CMD:就近依赖 同步加载 commonjs  node  require module.exports  一般在服务端
+//define(factory)
+
+//define(function(require, exports, module) {
+//  var a = require('./a');
+//  a.doSomething();
+//  var b = require('./b');
+//  b.doSomething();
+//})
+
+UMD: 写一个文件需要兼容不同的加载规范的时候
+browserify: 命令行工具,直接将模块转换为浏览器可用的模块
+[ http://blog.csdn.net/Real_Bird/article/details/54869066 ]
+
+
+
+es6: 通过import、export实现模块的输入输出。其中import命令用于输入其他模块提供的功能，export命令用于规定模块的对外接口。
+//var a = 1;
+//var b = 2;
+//var c = 3;
+//export {a, b, c} 
+//export default class {} 
+exports 输出的值是动态绑定，绑定其所在的模块。
+
+import {a as aa, b, c} from './abc';
+console.log(aa,b,c)
+
+import * from as abc form './abc'; //整体加载
+ ejs 模板
+
+
+Babel 转码器  可以将es6-->es5  不需要担心现有环境是否支持
+$	babel	example.js	--out-file	compiled.js
+
+let  定义作用域内有效  
+暂时性死区 TDZ
+{
+	t = '123';
+	typeof t // Identifier 'a' has already been declared 
+	let t;//t is not defined 也就说 不能变量声明提升 let,const凡是在声明之前就使用这些变量,就会报错。
+}
+let不允许在相同作用域内,重复声明同一个变量
+ES6规定,块级作用域之中,函数声明语句的行为类似于 	let	 ,在块级作用域之外不可引用
+
+只要某种数据结构具有Iterator接口,都可以采用数组形式的解构赋值
+
+animate.css
+
+
+
+redis缓存数据库
+
+

@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div,ul,span{  margin:0;padding: 0;}
+        div#container{ width: 470px;height: 150px;border: 1px solid darkgrey;margin: 10px auto; position: relative;overflow: hidden;}
+        ul.box{ width: 2350px;height: 100%;list-style: none;-overflow: hidden;position: absolute }
+        li{
+            float: left;
+            height:100%;
+            width: 470px;
+        }
+        .lid1{
+          height: 300px;
+          width: 100%;
+          background-color: #B44242;
+          display: inline-block;
+        }
+        .lid2{
+          height: 300px;
+          width: 100%;
+          background-color:#E72CA5;
+          display: inline-block;
+        }
+        .lid3{
+          height: 300px;
+          width: 100%;
+          background-color: #215A19;
+          display: inline-block;
+        }
+        .lid4{
+          height: 300px;
+          width: 100%;
+          background-color: #68F1CD;
+          display: inline-block;
+        }
+        .lid5{
+          height: 300px;
+          width: 100%;
+          background-color: #CDD244;
+          display: inline-block;
+        }
+        #control{
+            position: absolute;
+            width: 150px;
+            height: 24px;
+            right: 8px;
+            bottom: 8px;
+            text-align: right;
+        }
+        #control span{
+            display: inline-block;
+            background-color: #666;
+            color: #fff;
+            text-align: center;
+            line-height: 24px;
+            height: 100%;
+            width: 24px;
+            margin-left: 4px;
+        }
+        #control .active{
+            color: #fff;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <ul class="box">
+        <li><div class="lid1">1</div></li>
+        <li><div class="lid2">2</div></li>
+        <li><div class="lid3">3</div></li>
+        <li><div class="lid4">4</div></li>
+        <li><div class="lid5">5</div></li>
+    </ul>
+    <div id="control">
+        <span class="active">1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+    </div>
+</div>
+<script src="move.js"></script>
+<script>
+   
+    var oBox = document.getElementsByClassName('box')[0];
+    var aLi = oBox.getElementsByTagName('li');
+    var oC = document.getElementById('control');
+    var aSpan =oC.getElementsByTagName('span');
+    var onOff = true;
+    var num = 0
+    var num2 = 0;
+    var timer = null
+    var iWidth = aLi[0].offsetWidth;
+    //鼠标移入停止定时
+    oBox.onmouseover = function () {
+        clearInterval(timer)
+    }
+    //鼠标移出开启定时
+    oBox.onmouseout = function () {
+        timer = setInterval(run,3000)
+    }
+    //默认开启定时
+    timer = setInterval(run,3000)
+    
+    //鼠标干涉所执行的
+    for(var i=0;i<aLi.length;i++){
+        //记录位置
+        aSpan[i].index = i;
+        //触摸某个span，将该span.className = 'active',其余的为''
+        //将相对位置传给num,num2
+        aSpan[i].onmouseover = function () {
+            clearInterval(timer)
+            if( onOff ){
+                onOff = !onOff
+                for( var i=0;i<aSpan.length;i++ ){
+                    aSpan[i].className = ''
+                }
+                this.className = 'active'
+                num = this.index;
+                num2= this.index
+                startMove(oBox,{left:-this.index*iWidth})
+                onOff = !onOff
+            }
+        }
+    }
+    //定时器轮播所执行的
+    function run() {
+        //如果是第一个,left = 0
+        if(  num==0){
+            aLi[0].style.position = 'static';
+            oBox.style.left = 0;
+            num2 = 0
+        }
+        //如果是最后一个,left = aLi.length*iWidth
+        if( num==aLi.length-1 ){
+            num =0;
+            aLi[0].style.position = 'relative';
+            aLi[0].style.left = aLi.length*iWidth+'px'
+            aLi[0].style.top = 0
+        }else {
+            num++
+        }
+        num2++
+        for(var i=0;i<aLi.length;i++){
+            aSpan[i].className = '';
+        }
+        aSpan[num].className = 'active';
+        startMove( oBox , { left : - num2*iWidth } );
+    }
+
+    //-----------------------move.js----------------------
+    function startMove(obj,json,endFn){
+        
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function(){
+            var bBtn = true;
+            for(var attr in json){
+        
+              var iCur = 0;
+      
+              if(attr == 'opacity'){
+                  if(Math.round(parseFloat(getStyle(obj,attr))*100)==0){
+                    iCur = Math.round(parseFloat(getStyle(obj,attr))*100);
+                  }else{
+                    iCur = Math.round(parseFloat(getStyle(obj,attr))*100) || 100;
+                  } 
+              }else{
+                  iCur = parseInt(getStyle(obj,attr)) || 0;
+              }
+        
+              var iSpeed = (json[attr] - iCur)/8;
+              iSpeed = iSpeed >0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+              if(iCur!=json[attr]){
+                bBtn = false;
+              }
+        
+              if(attr == 'opacity'){
+                obj.style.filter = 'alpha(opacity=' +(iCur + iSpeed)+ ')';
+                obj.style.opacity = (iCur + iSpeed)/100;
+
+              }
+              else{
+                obj.style[attr] = iCur + iSpeed + 'px';
+              }
+        
+        
+            }
+      
+            if(bBtn){
+              clearInterval(obj.timer);
+
+              if(endFn){
+                endFn.call(obj);
+              }
+           }
+      
+       },30);
+  
+    }
+  
+  
+  function getStyle(obj,attr){
+    if(obj.currentStyle){
+      return obj.currentStyle[attr];
+    }
+    else{
+      return getComputedStyle(obj,false)[attr];
+    }
+  }
+</script>
+
+</body>
+</html>

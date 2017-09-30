@@ -1,175 +1,255 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
+    <title>无限滚动效果</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>无限加载</title>
-</head>
-<style>
-    *{
-        padding:0;
-        margin:0;
-    }
-    body{
-        /*overflow:hidden;*/
-    }
-    header{
-        height:10vh;
-        width:100vw;
-        background:#f7f7f8;
-        line-height:10vh;
-        text-align:center;
-        font-size:2em;
-        position:fixed;
-        top:0;
-        left:0;
-        z-index:2;
-    }
-    ul{
-        
-        margin-top:10vh;
-        width:100vw;
-        height:90vh;
-        overflow:auto;
-        padding-bottom:10vh;
-        background:#c8c7cc;
-    }
-    li{
-        position:relative;
-        z-index:1;
-        box-sizing:border-box;
-        width:100vw;
-        height:8vh;
-        padding:0 5vw;
-        margin:0 auto;
-        border-bottom:1px solid #000;
-        line-height:8vh;
-        list-style:none;
-        background:#fff;
-    }
-    li:last-of-type{
-        border:0;
-    }
-    footer{
-        box-sizing:border-box;
-        position:fixed;
-        bottom:0;
-        height:10vh;
-        width:100vw;
-        padding:1vh 0 ;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        z-index:0;
-    }
-    .vanish{
-        display:none;
-    }
-    .rect{
-        height:50%;
-        width:1.5vw;
-        margin:0 1.3vw;
-        background:#67CF22;
-        display:inline-block;
-        animation:bounce 0.8s linear ;
-        animation-iteration-count:infinite;
-    }
-    .rect:nth-of-type(2){
-        animation-delay:0.1s;
-    }
-    .rect:nth-of-type(3){
-        animation-delay:0.2s;
-    }
-    .rect:nth-of-type(4){
-        animation-delay:0.3s;
-    }
-    .rect:nth-of-type(5){
-        animation-delay:0.4s;
-    }
-    @keyframes bounce{
-        59%{
-            transform:scaleY(1)
-        }
-        60%{
-            transform:scaleY(2)
-        }
-        80%{
-            transform:scaleY(1)
-        }
-        100%{
-            transform:scaleY(1)
-        }
-    }
-</style>
-<body>
-    <header>
-        瀑布流 无限加载
-    </header>
-    <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-        <li>Item 4</li>
-        <li>Item 5</li>
-        <li>Item 6</li>
-        <li>Item 7</li>
-        <li>Item 8</li>
-        <li>Item 8</li>
-        <li>Item 9</li>
-        <li>Item 10</li>
-        <li>Item 11</li>
-        <li>Item 12</li>
-        <li>Item 13</li>
-        <li>Item 14</li>
-        <li>Item 15</li>
-    </ul>
-    <footer class="vanish">
-        <div class="rect"></div>
-        <div class="rect"></div>
-        <div class="rect"></div>
-        <div class="rect"></div>
-        <div class="rect"></div>
-    </footer>
-</body>
-<script>
-  let oLi = document.getElementsByTagName('li')[0];
-  let oUl = document.getElementsByTagName('ul')[0];
-  let oFooter = document.getElementsByTagName('footer')[0];
-  let oFrag = document.createDocumentFragment();
-  let num = 16;
-  let timer = null;
-  let boo = true;
-
-let get = (event)=>{
-    //ul已经滚动大小
-    var rollTop = oUl.scrollTop;
-    //可见ul
-    var winHeight = oUl.clientHeight;
-    //跟个 ul大小
-    var ulHeight = oUl.scrollHeight;
-
-    console.log(ulHeight,rollTop + winHeight)
-    if(ulHeight === rollTop + winHeight && boo){
-        boo = false;
-        oFooter.classList.remove('vanish');
-        for(let i = 0 ; i<5; i++){
-            oLi = oLi.cloneNode();
-            oLi.innerHTML = 'item ' + num++;
-            oFrag.appendChild(oLi);
-        }
-
-        timer = setTimeout(()=>{
-            oFooter.classList.add('vanish')
-            
-            oUl.appendChild(oFrag);
-            clearTimeout(timer);
-            boo = true;
-        },1000)
-    }
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body{
+    font-family: "Microsoft YaHei", sans-serif;
 }
 
-document.addEventListener('mousewheel',get)
-oUl.addEventListener('touchmove',get)
-</script>
+.container{
+    background-color: #666;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.border{
+    width: 294px;
+    height: 600px;
+    min-width: 294px;
+    min-height: 600px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(../imgs/iphone6.png);
+    box-sizing: border-box;
+    padding: 72px 18px 74px 18px;
+}
+
+
+.content{
+    overflow: auto;
+    border-radius: 2px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    background-color: white;
+}
+
+.content::-webkit-scrollbar{
+    width: 4px;
+}
+
+.content::-webkit-scrollbar-track{
+    background-color: #aaa;
+}
+
+.content::-webkit-scrollbar-thumb{
+    background-color: #555;
+}
+
+.loading{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+}
+
+.loading img{
+    width: 48px;
+    height: 48px;
+    animation-name: rotate;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rotate{
+
+    from{
+        transform: rotate(0deg);
+    }
+
+    to{
+        transform: rotate(365deg);
+    }
+
+}
+
+
+.item{
+    margin-top: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 4px 8px 4px 8px;
+    background-color: white;
+    box-shadow: 0px 0px 0px 0px;
+    transition: box-shadow 0.3s;
+
+}
+
+.item:hover{
+
+    box-shadow: 0px 0px 5px 0px;
+
+
+}
+
+  
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="border">
+
+            <div class="content" id="content">
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    
+    <script>
+      (
+    function(global){
+
+    "use strict";
+
+    // 返回id的element
+    function $(id){
+        return document.getElementById(id);
+    }
+
+    // 返回className的element
+    function $$(className){
+        return document.getElementsByClassName(className);
+    }
+
+    function addItem(content, itemContent){
+
+        var item = document.createElement("div");
+        item.className = "item";
+
+        var p = document.createElement("p");
+        p.innerHTML = itemContent;
+        item.appendChild(p);
+        content.appendChild(item);
+    }
+
+    // 创建表示loading状态的item
+    function createLoadingElement(){
+        var loadingElement = document.createElement("div");
+        loadingElement.className = "loading";
+        var loadingPic = document.createElement("img");
+        loadingPic.src = "https://raw.githubusercontent.com/pwcong/IFE2017-EXAMS/master/src/Business/infinite-scroll/imgs/load.png";
+        loadingElement.appendChild(loadingPic);
+
+        return loadingElement;
+
+    }
+
+    var content = $("content");
+
+    var increment = 8,
+        count = 0;
+
+    for(var i = count; i < count+increment; i++){
+
+        addItem(content, "item " + i);
+
+    }
+
+    count += increment;
+
+    loadMore(content, createLoadingElement(), function(finish){
+
+        // 模拟加载延时
+        setTimeout(function(){
+
+            // 当加载完成时必须执行finish函数取消loading状态
+            finish();
+
+            for(var i = count; i < count + increment; i++){
+
+                addItem(content, "item " + i);
+
+            }
+
+            count += increment;
+
+        },2000);
+
+    });
+
+
+    // loadMore 可以帮助显示加载状态提示信息
+    // container: Element. 容器Element
+    // loadingElement: Element. 加载状态提示Element
+    // onLoad: Function(finish: Function). 加载方法，含finish参数。执行finish函数可以取消加载状态
+    function loadMore(container, loadingElement, onLoad){
+
+        // 状态标记
+        var isLoading = false;
+
+        // 当处于loading状态并且完成时，取消loading状态
+        function finish(){
+
+            if(isLoading){
+                // 移除loading状态标识
+                container.removeChild(loadingElement);
+                isLoading = false;
+            }
+
+        }
+
+        // 监听滑动状态
+        container.onscroll = function(){
+
+            // 判断是否处于容器底部
+            if(container.offsetHeight + container.scrollTop >= container.scrollHeight){
+
+                // 若处于非loading状态之时调用
+                if(!isLoading){
+                    container.appendChild(loadingElement);
+
+                    // 使容器滑至底部
+                    container.scrollTop = container.scrollHeight-container.offsetHeight;
+                    
+                    // 标记为loading状态
+                    isLoading = true;
+
+                    // 执行用户自定义加载动作，并传入finish函数供用户调用取消加载状态
+                    onLoad(finish);
+                }
+
+            }
+
+        }
+
+
+    }
+    
+
+
+})(window);
+    </script>
+  
+</body>
+
 </html>

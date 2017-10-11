@@ -129,3 +129,94 @@ jquery:
 2.跨域
 同源　：端口　协议 子域名　主域名　需要相同  　
 跨域的方式：JSONP CORS  
+jsonp只能发送 get 请求 script的特点时一旦加载成功就会立刻执行
+
+html:
+
+      <script type="text/javascript" src="http://127.0.0.1:8000?callback=handler"></script>
+后台js:
+
+      var fs = require("fs");
+      var http = require("http");
+      var url = require("url");
+      http.createServer(function(req, res){
+
+
+             var queryObj = url.parse(req.url, true).query;
+             /*
+                queryObj = {"callback": "handler"}
+             */
+
+             console.log(queryObj);
+
+             fs.readFile("./test.json", function(err, data){
+                  console.log(data);
+
+
+                  // "hanlder(obj)";	 
+                   res.write(queryObj.callback + "(" + data  + ")");
+
+                   res.end();
+             });
+
+
+      }).listen(8000);
+
+test.json:
+
+      {
+            "name": "lisi",
+            "age": 10
+      }
+      
+XHR2跨域：
+服务端　
+      
+      header('Access-Control-Allow-Origin:*');
+      header('Access-Control-Allow-Methods:POST,GET');
+      
+html:用ajax数据传输
+
+      $.ajax({
+            type:'GET',
+            url:'http://127.0.0.1:8000',
+            dataType:'json',
+            success:function(data){
+                  if(data.success){
+                        console.log(111);
+                  }else{
+                        console.log(222);
+                  }
+            },error:function(jqXHR){
+                  console.log(333);
+            }
+      })
+3. apply() call()  
+apply：应用某一对象的一个方法，用另一个对象替换当前对象。例如：B.apply(A, arguments);即A对象应用B对象的方法.  
+call：调用一个对象的一个方法，以另一个对象替换当前对象。例如：B.call(A, args1,args2);即A对象调用B对象的方法.  
+共同点：都“可以用来代替另一个对象调用一个方法，将一个函数的对象上下文从初始的上下文改变为由thisObj指定的新对象”.  
+不同之处：参数传递方式不同　apply()数组的方式传递.  
+用途：继承　多继承.
+
+            function Class10(){
+                    this.showSub = function(a,b){
+                          alert(a - b);
+                      }   
+            }
+
+            function Class11(){
+              this.showAdd = function(a,b){
+                    alert(a + b);
+                }  
+            }
+
+            function Class12(){
+              Class10.apply(this);
+              Class11.apply(this);   
+              // Class10.call(this);
+              //Class11.call(this);  
+            }
+
+            var c2 = new Class12();
+            c2.showSub(3,1);    //2
+            c2.showAdd(3,1);    //4

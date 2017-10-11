@@ -1,5 +1,6 @@
 1.ajax
 原生：
+
       var request;
       if(window.XMLHttpRequest){
         request = new XMLHttpRequest();
@@ -126,5 +127,5 @@ jquery:
      
 
 2.跨域
-同源　：端口　主机名　协议　需要相同  
-跨域的方式：JSONP CORS  
+同源　：端口　协议 子域名　主域名　需要相同  　
+跨域的方式：JSONP CORS  

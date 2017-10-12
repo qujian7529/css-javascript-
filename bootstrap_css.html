@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
+	<!-- user-scalable=no 可以禁用其缩放（zooming）功能。这样禁用缩放功能后，用户只能滚动屏幕，就能让你的网站看上去更像原生应用的感觉 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>bootstrap</title>
+	 <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+	 <link href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.css" rel="stylesheet">
+	 <style>
+	 	.row{
+	 		border:1px solid #85D857;
+	 	}
+	 	.col-md-4{
+	 		border: 1px solid #60EEE2;
+	 	}
+	 	.col-md-6{
+	 		border: 1px solid #DD7B27;
+	 	}
+	 	/*媒体查询（media query）来创建关键的分界点阈值*/
+	 	/* 小屏幕（平板，大于等于 768px） */
+		@media (min-width: 768px) { 
+			.container { width: 750px; }
+			.col-xs-3{
+				display: block;
+			}
+		}
+
+		/* 中等屏幕（桌面显示器，大于等于 992px） */
+		@media (min-width:992px) { 
+			.container { width: 970px; }
+			.col-xs-3{
+				display: none;
+				background-color: #74C842
+			}
+		}
+
+		/* 大屏幕（大桌面显示器，大于等于 1200px） */
+		@media (min-width:  1200px) { 
+			.container { width: 1170px; }
+			.col-xs-3{
+				display: none;
+			}
+		}
+	 </style>
+</head>
+<body>
+	<!-- 布局容器　.container　.container-fluid  -->
+	<!-- container类用于固定宽度并支持响应式布局的容器 -->
+	<div class="container">
+		<div class="row">
+		  <!-- 栅格 -->
+		  <div class="col-md-4">
+
+		  	<div class="row">
+		  		<!-- 嵌套列 -->
+		  		<!-- 通过使用 .col-md-push-* 和 .col-md-pull-* 类就可以很容易的改变列（column）的顺序 -->
+		  		<!-- push 向右推　pull　向左拉 -->
+		  		<div class="col-md-6 col-md-push-6">.col-md-6 嘻嘻</div>
+		  		<div class="col-md-6 col-md-pull-6">.col-md-6　吼吼</div>
+		  	</div>
+		  	<div class="row">
+		  		 <div class="col-md-1 col-md-push-11" style="background-color: #61B5C5">col-md-1</div>
+	            <div class="col-md-2 col-md-pull-1" style="background-color: #61B5C5">col-md-2</div>
+	            <div class="col-md-9 col-md-pull-1" style="background-color: #61B5C5">col-md-9</div>
+			  	</div>
+		  </div>
+		  <!-- 列偏移 -->
+		   <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
+		  
+		</div>
+	</div>
+	<hr>
+	<!-- .container-fluid 类用于 100% 宽度，占据全部视口（viewport）的容器 -->
+	<div class="container-fluid">
+		<!-- 排版 　del strong em small ...-->
+		
+		<div class="row">
+		<!-- 响应式列重置 -->
+		  <div class="col-md-4 col-xs-2">.col-md-1
+		  		<!-- lead　让p 标签突出显示 -->
+				<p class="lead">is p</p>
+		  </div>
+		  <!-- mark标签　　可以用来作标签 -->
+		  <div class="col-md-4 col-xs-2">.col-md-<mark>1</mark></div>
+		  <div class="col-md-4 col-xs-2"><del>.col</del><s>-md-1</s></div>
+		  <div class=" col-xs-3"><ins><strong>.col</strong>-md-1</ins></div>
+		  <div class=" col-xs-3">
+		  	<small><em>.col-md-1</em></small>
+		  </div>
+		  
+		</div>
+		<div style="background-color: #000;color: #fff"  class="container">
+			<!-- <b> 用于高亮单词或短语，不带有任何着重的意味；
+			<i> 标签主要用于发言、技术词汇等。 -->
+			<b >is b</b>
+			<p class="text-left">.text-left</p>
+			<p class="text-center">.text-center</p>
+			<p class="text-right">.text-right</p>
+			<p class="text-justify">.text-justify</p>
+			<p class="text-nowrap">.text-nowrap</p>
+			<!-- 缩略语 -->
+			<p>An abbreviation of the word attribute is <abbr title="attribute">attr</abbr></p>
+		</div>
+		<!-- 引用 -->
+		<blockquote>
+		  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+		  <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+		</blockquote>
+		<blockquote class="blockquote-reverse">
+		  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+		  <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+		</blockquote>
+		<!-- ul ol -->
+		<div>
+			<!-- 无样式列表 -->
+			<!-- list-unstyled ===> 移除了默认的 list-style 样式和左侧外边距的一组元素（只针对直接子元素） -->
+			<!-- list-inline===> display:inlineblock -->
+			<ul class="list-unstyled list-inline">
+				<li>1111111111111</li>
+				<li>1111111111111</li>
+				<li>1111111111111</li>
+				<li>
+					<ul>
+						<li>2222222</li>
+						<li>2222222</li>
+						<li>2222222</li>
+					</ul>
+				</li>
+				<li>
+					<ol>
+						<li>3333333</li>
+						<li>3333333</li>
+						<li>3333333</li>
+					</ol>
+				</li>
+			</ul>
+			<!-- 描述 -->
+			<div>
+				<dl>
+					<dt>主题</dt>
+					<dd>描述</dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt>主题</dt>
+					<dd>描述</dd>
+				</dl>
+			</div>
+			<div>
+				<!-- code做标签 　类似mark-->
+				<!-- code包裹内联样式的代码片段 -->
+				<!-- kbd  标签标记用户通过键盘输入的内容。 -->
+				For example, <code>&lt;section&gt;</code> should be wrapped as <mark>inline</mark>.
+				To switch directories, type <kbd>cd</kbd> followed by the name of the directory.
+			</div>
+			<div>
+				<!-- 代码块 -->
+				<pre>&lt;p&gt;Sample text here...&lt;/p&gt;</pre>
+				<!-- var 标记变量 -->
+				<var>y</var> = <var>m</var><var>x</var> + <var>b</var>
+				<!-- samp 标签来标记程序输出的内容。 -->
+				<samp>This text is meant to be treated as sample output from a computer program.</samp>
+			</div>
+			<div>
+				<!-- 鼠标悬停 table-hover -->
+				<!-- 条纹状表格 table-striped -->
+				<table class="table table-striped table-hover">
+					<thead>table</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+						</tr>
+						<tr><td>2</td></tr>
+						<tr><td>3</td></tr>
+					</tbody>
+					<tfoot>
+						<tr><td>tfoot</td></tr>
+					</tfoot>
+				</table>
+				<!-- 带边框的表格 table-bordered -->
+				<!-- 紧缩表格 table-condensed -->
+				<table class="table table-bordered">
+					<thead>table</thead>
+					<tbody>
+						<tr>
+							<td class="active">1</td>
+							<td class="success"> 2</td>
+							<td class="warning">3</td>
+						</tr>
+						<tr><td class="danger"> 2</td></tr>
+						<tr><td class="info">3</td></tr>
+					</tbody>
+					<tfoot>
+						<tr><td>tfoot</td></tr>
+					</tfoot>
+				</table>
+			</div>
+			<div>
+				  <!-- 内联表单 -->
+				<form  class="form-inline">
+				<!-- <form action=""> -->
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">Email address</label>
+				     <div class="input-group">
+				    	<div class="input-group-addon">0</div>
+				    	<div class="input-group-addon">1</div>
+				    	<div class="input-group-addon">1</div>
+				    	<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputPassword1">Password</label>
+				    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				  </div>
+				 <div>
+				 	<!--校验状态 has-success has-error  has-warning-->
+				 	<!-- 校验图标has-feedback -->
+				 	<!-- 尺寸　 form-group-lg 　form-group-sm -->
+				 	<div class="form-group has-warning has-feedback">
+				 		<label class="control-label" for="inputWarning1">Input with warning</label>
+				 		<!-- input-lg　input-sm  尺寸 -->
+				 		<input type="text" value="text"　 class="form-control" id="inputWarning1">
+				 		<!-- 添加额外的校验图标 -->
+				 		<span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+  						<span id="inputWarning2Status" class="sr-only">(warning)</span>
+
+				 	</div>
+				 	<div class="form-group has-success has-feedback">
+						 	<label class="control-label" for="inputGroupSuccess1">Input group with success
+							 </label>
+						 	<div class="input-group">
+						    	<span class="input-group-addon">@</span>
+						   		<input type="text" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status">
+						 </div>
+						 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+						 <span id="inputGroupSuccess1Status" class="sr-only">(success)</span>
+						 </div>
+				 	<hr>
+				 	<input type="time" >一天时间
+				 	<hr>
+				 	<input type="week">日历型选择
+				 	<hr>
+				 	<input type="color">颜色选择
+				 	<hr>
+				 	<input type="month">类似week
+				 	<hr>		
+				 	<input type="date">date		 	
+				 	<hr>
+				 	<input type="url">url
+				 	<hr>
+				 	<input type="tel">tel
+				 	<hr>
+				 	<input type="search">search
+				 	<hr>
+				 	<input type="datetime">datetime
+				 	<hr>
+				 	<input type="datetime-local">datetime-local
+				 	<hr>
+				 	<!-- multiple 支持多选 -->
+				 	<select multiple name="" class="form-control" id="">
+			 			  <option>1</option>
+						  <option>2</option>
+						  <option>3</option>
+						  <option>4</option>
+						  <option>5</option>
+				 	</select>
+				 	<hr>
+				 	<!-- 用于演示 .form-control 元素的 :focus 状态。 -->
+				 	<input type="text" class="form-control">
+				 	<hr>
+				 	<!-- 禁用包含的控件 -->
+				 	<fieldset disabled>
+				 		<input type="text">
+				 	</fieldset>
+				 	<hr>
+				 	<!-- 提示信息 -->
+				 	<span id="helpBlock" class="help-block">111</span>
+				 </div>
+				 <div>
+				 	<div class="radio">
+					  <label>
+					    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+					    Option one is this and that&mdash;be sure to include why it's great
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+					    Option two can be something else and selecting it will deselect option one
+					  </label>
+					</div>
+					<div class="radio disabled">
+					  <label>
+					    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+					    Option three is disabled
+					  </label>
+					</div>
+				 </div>
+				  <div class="checkbox">
+				    <label>
+				      <input type="checkbox"> Check me out
+				    </label>
+				  </div>
+				  <button type="submit" class="btn btn-default">Submit</button>
+				</form>
+				<!-- 水平排列的表单 -->
+				<form class="form-horizontal">
+				  <div class="form-group">
+				    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+				    <div class="col-sm-10">
+				      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+				    <div class="col-sm-10">
+				      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-sm-offset-2 col-sm-10">
+				      <div class="checkbox">
+				        <label>
+				          <input type="checkbox"> Remember me
+				        </label>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-sm-offset-2 col-sm-10">
+				    <!-- btn-primary  btn-success btn-info  btn-warning btn-danger  btn-link button样式-->
+				    <!-- btn-sm btn-xs btn-lg　btn-block　 button　大小-->
+				      <button type="submit" class="btn btn-default">Sign in</button>
+				    </div>
+				  </div>
+				</form>
+			</div>
+			<!-- 快速浮动 -->
+			<!-- center-block 内容块居中-->
+			<!-- clearfix　清除浮动 -->
+			<!-- .show 和 .hidden 类可以强制任意元素显示或隐藏 -->
+			<!-- .sr-only 类可以对屏幕阅读器以外的设备隐藏内容。.sr-only 和 .sr-only-focusable 联合使用的话可以在元素有焦点的时候再次显示出来（例如，使用键盘导航的用户） -->
+			<!-- .text-hide 图片替换-->
+			<div class="pull-left">
+				<span class="caret"></span>
+			</div>
+			<div class="pull-right">
+				<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</div>
+		</div>
+	</div>
+	<!-- img-rounded rmg-circle img-thumbnail  图片形状-->
+	<img src="./002.jpg" alt="" class="img-responsive img-circle" width="300px" height="300px">
+
+
+	<script src="https://cdn.bootcss.com/jquery/2.1.0/jquery.js"></script>
+</body>
+</html>

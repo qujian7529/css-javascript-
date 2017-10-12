@@ -220,3 +220,4 @@ call：调用一个对象的一个方法，以另一个对象替换当前对象�
             var c2 = new Class12();
             c2.showSub(3,1);    //2
             c2.showAdd(3,1);    //4
+4.js内置对象

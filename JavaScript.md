@@ -190,8 +190,8 @@ html:用ajax数据传输
             },error:function(jqXHR){
                   console.log(333);
             }
-      })
-3. apply() call()  
+      })
+#### 3. apply() call()
 apply：应用某一对象的一个方法，用另一个对象替换当前对象。例如：B.apply(A, arguments);即A对象应用B对象的方法.  
 call：调用一个对象的一个方法，以另一个对象替换当前对象。例如：B.call(A, args1,args2);即A对象调用B对象的方法.  
 共同点：都“可以用来代替另一个对象调用一个方法，将一个函数的对象上下文从初始的上下文改变为由thisObj指定的新对象”.  
@@ -220,4 +220,53 @@ call：调用一个对象的一个方法，以另一个对象替换当前对象�
             var c2 = new Class12();
             c2.showSub(3,1);    //2
             c2.showAdd(3,1);    //4
-4.js内置对象
+#### 4.事件委托
+http://www.cnblogs.com/liugang-vip/p/5616484.html  
+事件委托就是利用事件冒泡，只指定一个事件处理程序，就可以管理某一类型的所有事件。  
+
+有三个同事预计会在周一收到快递。为签收快递，有两种办法：一是三个人在公司门口等快递；二是委托给前台MM代为签收。现实当中，我们大都采用委托的方案（公司也不会容忍那么多员工站在门口就为了等快递）。前台MM收到快递后，她会判断收件人是谁，然后按照收件人的要求签收，甚至代为付款。这种方案还有一个优势，那就是即使公司里来了新员工（不管多少），前台MM也会在收到寄给新员工的快递后核实并代为签收。  
+
+这里其实还有2层意思的：  
+
+第一，现在委托前台的同事是可以代为签收的，即程序中的现有的dom节点是有事件的；  
+
+第二，新员工也是可以被前台MM代为签收的，即程序中新添加的dom节点也是有事件的。  
+
+
+适合事件委托的事件：click ,mousedown,mouseup,keydown,keyup,keypress  
+mouseover mouseout,有事件冒泡，但是处理他们的时候需要特别注意，因为需要经常计算他们的位置，不好把控。focus,blur之类，没有冒泡特性，不能事件委托  
+
+      window.onload = function(){
+            var oBtn = document.getElementById("btn");
+            var oUl = document.getElementById("ul1");
+            var aLi = oUl.getElementsByTagName('li');
+            var num = 4;
+            
+            //事件委托，添加的子元素也有事件
+            oUl.onmouseover = function(ev){
+                var ev = ev || window.event;
+                var target = ev.target || ev.srcElement;
+                if(target.nodeName.toLowerCase() == 'li'){
+                    target.style.background = "red";
+                }
+                
+            };
+            oUl.onmouseout = function(ev){
+                var ev = ev || window.event;
+                var target = ev.target || ev.srcElement;
+                if(target.nodeName.toLowerCase() == 'li'){
+                    target.style.background = "#fff";
+                }
+                
+            };
+            
+            //添加新节点
+            oBtn.onclick = function(){
+                num++;
+                var oLi = document.createElement('li');
+                oLi.innerHTML = 111*num;
+                oUl.appendChild(oLi);
+            };
+        }
+        
+5.js内置对象

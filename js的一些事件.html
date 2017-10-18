@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件</title>
+	<style>
+		.div1c{
+			height: 400px;
+			width: 400px;
+			background-color: #C28114;
+			position: relative;
+		}
+		.div2c{
+			height: 30px;
+			width: 30px;
+			background-color: #44DF41;
+			position: absolute;
+			right: 0;
+			bottom: 0;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="inputBtn">
+	<button onclick="test()">button</button>
+	<button class="butn2">button2</button>
+	<button class="buts">button3</button>
+	<div class="div1c">
+		<div class="div2c"></div>		
+	</div>
+	<div>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+	</div>
+	<div>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+	</div>
+	<div>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+	</div>
+	<div>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+	</div>
+	<div>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+		<p>adasdsadsa</p>
+	</div>
+	<script>
+		// js事件绑定类型
+		// １－－－－－－－－－－－－－－－－－
+		var a = document.getElementById('inputBtn');
+		
+		// 第三个参数是true：表示允许在捕获阶段响应事件
+		// 第三个参数是false：表示不允许在捕获阶段响应事件
+		inputBtn.addEventListener('click',func);
+		function func(){
+			alert('事件监听');
+		}
+		// ２－－－－－－－－－－－－－－－－－－－－－
+		function test(){
+			alert('test')
+		}
+		// ３－－－－－－－－－－－－－－－－－－－－－
+		var b = document.getElementsByClassName('butn2')[0];
+		b.onclick = function (){
+			alert('onclick')
+		}
+
+		// 移除绑定
+		inputBtn.removeEventListener('click',func,false);
+
+
+
+		// 			事件监听            			滚轮事件
+
+		// 谷歌   	addEventListener         	onmousewheel
+
+	 	// 	IE    	attachEvent                 onmousewheel
+
+	 	// 	FF     	addEventListener         	DOMMouseScroll
+ 		
+ 		// 兼容不同浏览器的事件绑定＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+ 		function addEvent(obj,xEvent,fn){
+ 			if(obj.attachEvent){
+ 				// ie 
+ 				obj.attachEvent('on' + xEvent,fn);
+ 			}else{
+ 				// ff chrome
+ 				obj.addEventListener(xEvent,fn,false);
+ 			}
+ 		}
+ 		function fun3(){
+ 			console.log(6666)
+ 		}
+
+ 		window.onload = function(){
+ 			// var buts = document.getElementsByClassName('buts')[0];
+ 			// console.log(buts);
+ 			// 如果是　chrome ie 
+ 			addEvent(window,'mousewheel',fun3);
+ 			// ff
+ 			addEvent(window,'DOMMouseScroll',fun3);
+ 		}
+
+ 		var d1 =document.getElementsByClassName('div1c')[0];
+ 		var d2 =document.getElementsByClassName('div2c')[0];
+ 		d2.onmousedown =function (ev){
+ 			var ev = ev ;
+ 			console.log(111);
+ 			console.log(ev.clientX,ev.clientY);
+ 			// 鼠标的位置
+ 			var clx1 = ev.clientX;
+ 			var cly1 = ev.clientY;
+ 			// div的宽高
+ 			disW = d1.offsetWidth;  
+            disH = d1.offsetHeight;
+            console.log(disW,disH);
+ 			d1.onmousemove = (ev) => {
+ 				var ev = ev || window.event;  
+ 				var W =  ev.clientX - clx1 + disW;  
+               	var H =  ev.clientY - cly1 + disH;  
+               	if(W<100){  
+                    W = 100;  
+                }  
+                if(W>800){  
+                    W =800;  
+                }  
+                if(H<100){  
+                    H = 100;  
+                }  
+                if(H>500){  
+                    H = 500;  
+                }  
+                d1.style.width =W +'px';// 拖拽后物体的宽  
+                d1.style.height = H +'px';// 拖拽后物体的高  
+ 			};
+ 			d2.onmouseup = function (){
+	 			d1.onmousemove = null;  
+	            d1.onmouseup = null;  
+
+	 		}
+ 		}
+ 		
+	</script>
+</body>
+</html>

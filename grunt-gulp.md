@@ -28,4 +28,4 @@ gulpfile.js
       return gulp.src('stylesheets/**/*.scss');
         .pipe(sass())
         .pipe(gulp.dest('dist/css'));
-    });
+    }); 

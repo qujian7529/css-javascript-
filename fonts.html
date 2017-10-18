@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		p{
+			font-size: 6em
+		}
+		.d{
+			background-image: url('http://i.imgur.com/hCrSRTN.png');
+
+		}
+		.clip-text {
+		  font-size: 6em;
+		  font-weight: bold;
+		  line-height: 1;
+		  position: relative;
+		  display: inline-block;
+		  margin: .25em;
+		  padding: .5em .75em;
+		  text-align: center;
+		  /* Color fallback */
+		  color: #fff;
+		  -webkit-background-clip: text;
+		  -webkit-text-fill-color: transparent;
+		}
+
+		.clip-text:before,
+		.clip-text:after {
+		  position: absolute;
+		  content: '';
+		}
+
+		/* Background */
+		.clip-text:before {
+		  z-index: -2;
+		  top: 0;
+		  right: 0;
+		  bottom: 0;
+		  left: 0;
+		  background-image: inherit;
+		}
+
+		/* Text Background (black zone) */
+		.clip-text:after {
+		  position: absolute;
+		  z-index: -1;
+		  top: .125em;
+		  right: .125em;
+		  bottom: .125em;
+		  left: .125em;
+		  background-color: #000;
+		}
+		/*-------------------------------------------*/
+		.p1{
+			text-shadow: 1px 1px 1px #3392A5;
+			color: #3392A5;
+			opacity: 1;
+		}
+		.p2{
+			color: hsl(192, 100%, 31%);
+			text-shadow:  0 1px 0 hsl(192, 100%, 21%), 0 2px 0 hsl(192, 100%, 21%), 0 3px 0 hsl(192, 100%, 21%), 0 4px 0 hsl(192, 100%, 21%), 0 5px 0 hsl(192, 100%, 21%), 0 6px 1px hsla(0, 0%, 0%, .1), 0 0 5px hsla(0, 0%, 0%, .1), 0 1px 3px hsla(0, 0%, 0%, .3), 0 3px 5px hsla(0, 0%, 0%, .2), 0 5px 10px hsla(0, 0%, 0%, .25);
+			transform: translateY(0px);
+			transition:  all .3s linear;
+
+		}
+		.p2:hover{
+			color:hsl(192, 100%, 38%);
+			text-shadow: 0 1px 0 hsl(192, 100%, 28%), 0 2px 0 hsl(192, 100%, 28%), 0 3px 0 hsl(192, 100%, 28%), 0 4px 0 hsl(192, 100%, 28%), 0 5px 0 hsl(192, 100%, 28%), 0 6px 1px hsla(0, 0%, 0%, .1), 0 0 5px hsla(0, 0%, 0%, .1), 0 1px 3px hsla(0, 0%, 0%, .3), 0 3px 5px hsla(0, 0%, 0%, .2), 0 5px 10px hsla(0, 0%, 0%, .25);
+		
+		}
+		
+		.p3h{
+			background-image: url('http://i.imgur.com/BFlh0FX.jpg');
+			-webkit-background-clip: text;
+		  	-webkit-text-fill-color: transparent;
+		}
+		.p3{
+			background-color: #000;
+		}
+		
+
+	</style>
+</head>
+<body>
+	<div class="divs">
+		<div class="d clip-text">
+			hello font !
+		</div>
+	</div>
+	<div>
+		<p class="p1">outline</p>
+		<p class="p2">outline</p>
+		<div class="p3">
+			<p class=" p3h">outline</p>
+		</div>
+		<p>outline</p>
+		<script>
+			var p2 = document.getElementsByClassName('p2')[0];
+			var shadow ;
+			p2.addEventListener('mousedown',function(enven){
+				console.log(this);
+				shadow = this.style.textShadow;
+				this.style.textShadow = 'none';
+				this.style.transform = 'translateY(6px)';
+			})
+			p2.addEventListener('mouseup',function(enven){
+				console.log(this);
+				this.style.textShadow = shadow;
+				this.style.transform = 'translateY(0px)';
+			})
+		</script>
+	</div>
+
+	
+</body>
+</html>

@@ -354,7 +354,15 @@ event.target     事件源
 Var obj=document.createElement(“标签名”);  
 document.body.appendChild(obj);  
 
-
+定时器  
+一次性定时器：  
+var name = window.setTimeout(function(),time)  
+反复性定时器：  　　
+var name2=window.setInterval(function()，time)  
+周期以毫秒计算  
+清除定时器：必须给定时器一个名字  
+一次性定时器  windowclearTimeout(name1);  
+反复性定时器  window.clearInterval(name2);  
 6.闭包
 词法作用域 函数当作值传递：
 相当于返回了一个通道，可以返回文这个函数词法作用域中的变量，函数所需要的数据结构保存了下来，数据结构中的值在外层函数执行时创建，外层函数执行完毕时理应销毁，但由于内部函数作为值返回出去，这些值得以保存了下来．而且无法访问必须通过返回的函数，这也就是私有性．执行过程和词法作用域是封闭的

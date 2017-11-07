@@ -269,4 +269,92 @@ mouseover mouseout,有事件冒泡，但是处理他们的时候需要特别注�
             };
         }
         
-5.js内置对象
+5.js数据类型　内置对象  
+undefined null number string boolean object  
+
+
+array  
+属性  
+.length  
+方法  
+.push() 在数组最后加入新的内容　　返回新的数组长度  
+.join(x) 用x链接每项　组成一个字符串　可以为""  
+.pop() 删除数组的最后一项数据　返回删除的数据  
+.concat() 链接内容或者数组　组成新的数组　  
+.reverse() 翻转数组  
+  
+string   
+属性  
+.length  
+方法  
+.split('x') 以x 方式分割字符串　返回数组  
+.indexOf('x') 索引x 在字符串第一次出现的位置　没有找到　-1  
+.charAt(n) 找到位置在n上的字符  
+.lastindexOf('x') 最后一次出现的位置  
+.substr(n,m) 截取字符串　  
+.toLowerCase() 把字符串的字母转化成小写  
+.toUpperCase() 把字符串的字母转化成大写  
+  
+Math对象  
+方法  
+Math.pow(n,m) n 的m 次方  
+Math.abs(n) n到原点的举例　绝对值  
+Math.round(n) 四舍五入  
+Math.floor(n) 向下取整  
+Math.ceil(n) 向上取整  
+Math.random() 随机　0-1数  
+  
+Date 对象  
+.toLocaleString() 当前本地格式显示时间  
+date.getFullYear() 获取date对象的年份  
+date.getMonth()   获取月份  
+date.getDate()   获取日期  
+date.getHours（） 获取小时  
+date.getMinutes（） 获取分钟  
+date.getSeconds（） 获取多少秒  
+date.getMilliSeconds（） 毫秒  
+date.getDay（）  获取星期几（0-6） 对应 周天至周六  
+date.getTime()   从1970年开始到时间日期的毫秒值（时间戳）  
+date.setFullYear   设置年份  
+  
+鼠标事件  
+onclick 鼠标点击事件  
+onmouseover 鼠标放上  
+onmouseout 鼠标离开  
+ondblclick 双击事件  
+onmousedown　鼠标按下  
+onmouseup　鼠标抬起  
+onmousemove　鼠标移动   
+  
+表单  
+onfocus 获取焦点  
+onblur 失去焦点  
+onsubmit 提交事件  
+onchange 发生改变的时候  
+onreset　重置  
+  
+键盘事件  
+onkeyup 按键抬起  
+onkeydown 按键按下  
+onkeypress 键盘按下一次  
+  
+窗口事件  
+  
+onload 　页面加载完成后立即执行  
+<script>window.onload=”init”；</script>  
+<body onload=”init()”></body>  
+
+Event ：  
+
+保存事件发生时的相关信息  
+event.clientX:   事件发生时的X的坐标  
+event.clientY:   事件发生时Y的坐标  
+event.target     事件源  
+注意：event必须通过以实参传递给函数才能使用  
+Var obj=document.createElement(“标签名”);  
+document.body.appendChild(obj);  
+
+
+6.闭包
+词法作用域 函数当作值传递：
+相当于返回了一个通道，可以返回文这个函数词法作用域中的变量，函数所需要的数据结构保存了下来，数据结构中的值在外层函数执行时创建，外层函数执行完毕时理应销毁，但由于内部函数作为值返回出去，这些值得以保存了下来．而且无法访问必须通过返回的函数，这也就是私有性．执行过程和词法作用域是封闭的
